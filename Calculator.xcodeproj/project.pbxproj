@@ -18,6 +18,7 @@
 		D5508C34167F2A8500339015 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5508C33167F2A8500339015 /* Default-568h@2x.png */; };
 		D5508C37167F2A8500339015 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5508C35167F2A8500339015 /* MainStoryboard.storyboard */; };
 		D5508C3A167F2A8500339015 /* SKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5508C39167F2A8500339015 /* SKViewController.m */; };
+		D5AF15DF16851B550065D9E6 /* SKCalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = D5AF15DE16851B550065D9E6 /* SKCalculatorBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		D5508C36167F2A8500339015 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D5508C38167F2A8500339015 /* SKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKViewController.h; sourceTree = "<group>"; };
 		D5508C39167F2A8500339015 /* SKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKViewController.m; sourceTree = "<group>"; };
+		D5AF15DD16851B550065D9E6 /* SKCalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCalculatorBrain.h; sourceTree = "<group>"; };
+		D5AF15DE16851B550065D9E6 /* SKCalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalculatorBrain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				D5508C2C167F2A8500339015 /* SKAppDelegate.h */,
 				D5508C2D167F2A8500339015 /* SKAppDelegate.m */,
 				D5508C35167F2A8500339015 /* MainStoryboard.storyboard */,
+				D5AF15DD16851B550065D9E6 /* SKCalculatorBrain.h */,
+				D5AF15DE16851B550065D9E6 /* SKCalculatorBrain.m */,
 				D5508C38167F2A8500339015 /* SKViewController.h */,
 				D5508C39167F2A8500339015 /* SKViewController.m */,
 				D5508C24167F2A8500339015 /* Supporting Files */,
@@ -177,6 +182,7 @@
 				D5508C2A167F2A8500339015 /* main.m in Sources */,
 				D5508C2E167F2A8500339015 /* SKAppDelegate.m in Sources */,
 				D5508C3A167F2A8500339015 /* SKViewController.m in Sources */,
+				D5AF15DF16851B550065D9E6 /* SKCalculatorBrain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +298,7 @@
 				D5508C3F167F2A8500339015 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
