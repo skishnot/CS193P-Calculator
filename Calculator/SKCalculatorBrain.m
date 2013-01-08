@@ -11,6 +11,7 @@
 @interface SKCalculatorBrain ()
 
 @property (nonatomic, strong) NSMutableArray *programStack;
+@property (nonatomic, strong) NSDictionary *variableValues;
 
 @end
 
@@ -25,6 +26,13 @@
     return _programStack;
 }
 
+- (NSDictionary *)variableValues {
+    if (!_variableValues) {
+        _variableValues = @{@"x":@5, @"y":@4.8, @"foo":@0};
+    }
+    return _variableValues;
+}
+
 - (void)setOperandStack:(NSMutableArray *)anArray {
     _programStack = anArray;
 }
@@ -35,7 +43,7 @@
 }
 
 - (void)enterVariable:(NSString *)variable {
-    //variable is pushed only if it doesn't belong in the ignorelist, which is a list of operations in this calculator.
+    //variable is added only if it doesn't belong in the ignorelist, which is a list of operations in this calculator.
     NSArray *ignoreList = @[@"sqrt", @"sin", @"cos", @"π", @"+", @"-", @"/", @"*", nil];
     if (![ignoreList containsObject:variable]) {
         [self.programStack addObject:variable];
@@ -102,6 +110,19 @@
     
     //I need a method that pops the top thing off the stack
     return [self popOperandOffStack:stack];
+}
+
++ (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
+    NSMutableArray *stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    
+    
+    
+    //I need a method that pops the top thing off the stack
+    return [self popOperandOffStack:stack];
+
 }
 
 - (void)clearHistory {
