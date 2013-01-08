@@ -51,7 +51,7 @@
 }
 
 - (IBAction)clearPressed {
-    [self.brain performOperation:@"Clear"];
+    [self.brain clearHistory];
     self.stackDisplay.text = @"History: ";
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;

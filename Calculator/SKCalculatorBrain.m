@@ -62,13 +62,15 @@
         result = sqrt([self popOperand]);
     } else if ([operation isEqualToString:@"π"]) {
         result = M_PI;
-    } else if ([operation isEqualToString:@"Clear"]) {
-        [self.operandStack removeAllObjects];
     }
     
     [self pushOperand:result];
                     
     return result;
+}
+
+- (void)clearHistory {
+    [self.operandStack removeAllObjects];
 }
 
 @end
