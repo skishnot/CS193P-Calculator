@@ -45,16 +45,15 @@
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
-    
-    NSString *digit = [@" " stringByAppendingString:self.display.text];
-        // extra touch to prevent culttering stackDisplay area
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:digit];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:[@" " stringByAppendingString:self.display.text]];
+    self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)clearPressed {
     [self.brain performOperation:@"Clear"];
     self.stackDisplay.text = @"History: ";
+    self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
