@@ -92,6 +92,15 @@
         } else {
         self.display.text = [self.display.text substringFromIndex:1];
         }
+    } else {
+        NSRange range = [self.display.text rangeOfString:@"-"];
+        if (range.location == NSNotFound) {
+            self.display.text = [@"-" stringByAppendingString:self.display.text];
+            [self enterPressed];
+        } else {
+            self.display.text = [self.display.text substringFromIndex:1];
+            [self enterPressed];
+        }
     }
 }
 
