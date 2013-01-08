@@ -13,17 +13,10 @@
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic, strong) SKCalculatorBrain *brain;
-@property (nonatomic) BOOL signChanged;
 
 @end
 
 @implementation SKViewController
-
-@synthesize display = _display;
-@synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
-@synthesize brain = _brain;
-@synthesize stackDisplay = _stackDisplay;
-@synthesize signChanged = _signChanged;
 
 - (SKCalculatorBrain *)brain {
     if (!_brain) {
@@ -35,7 +28,6 @@
 - (void)clearParameter {
     self.userIsInTheMiddleOfEnteringANumber = NO;
 //    self.display.text = @"0";
-    self.signChanged = NO;
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -81,25 +73,12 @@
 }
 
 - (IBAction)changeSign {
-    if (self.userIsInTheMiddleOfEnteringANumber) {
-        if (self.signChanged) {
-            if ([self.display.text length] > 1) {
-                self.display.text = [self.display.text substringFromIndex:1];
-                self.signChanged = NO;
-            }
-        } else {
-            self.display.text = [@"-" stringByAppendingString:self.display.text];
-            self.signChanged = YES;
-        }
+    NSRange range = [self.display.text rangeOfString:@"-"];
+    if (range.location == NSNotFound) {
+        self.display.text = [@"-" stringByAppendingString:self.display.text];
     } else {
-        if (self.signChanged) {
-            if ([self.display.text length] > 1) {
-                self.display.text = [self.display.text substringFromIndex:1];
-                [self enterPressed];
-            }
-        } else {
-            self.display.text = [@"-" stringByAppendingString:self.display.text];
-            [self enterPressed];
+        if (self.userIsInTheMiddleOfEnteringANumber) {
+            self.display.text = [self.display.text substringFromIndex:1];
         }
     }
 }
