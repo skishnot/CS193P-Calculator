@@ -117,12 +117,23 @@
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
     }
+    NSArray *list = [variableValues copy];
     
+    //I want to go over each NSString in the program, and look them up in the variableValues. Replace them with their corresponding values. Use 0 if they can't be found.
     
+    //for each item (aka obj) in the stack,
+    for (int i = 0; i > [stack count]; i++) {
+        id obj = [stack objectAtIndex:i];
+        
+        //if an item is a string and is in the list of variables defined in variableValue
+        if ([obj isKindOfClass:[NSString class]] && [list containsObject:obj]) {
+            //look it up in the dictionary and retrieve the value
+            obj = [variableValues objectForKey:obj];
+            }
+        }
     
     //I need a method that pops the top thing off the stack
     return [self popOperandOffStack:stack];
-
 }
 
 - (void)clearHistory {
