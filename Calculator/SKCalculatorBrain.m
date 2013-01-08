@@ -29,13 +29,17 @@
     _programStack = anArray;
 }
 
-- (void)pushOperand:(double)operand {
+- (void)enterOperand:(double)operand {
     NSNumber *operandObject = [NSNumber numberWithDouble:operand];
     [self.programStack addObject:operandObject];
 }
 
 - (void)enterVariable:(NSString *)variable {
-    [self.programStack addObject:variable];
+    //variable is pushed only if it doesn't belong in the ignorelist, which is a list of operations in this calculator.
+    NSArray *ignoreList = @[@"sqrt", @"sin", @"cos", @"π", @"+", @"-", @"/", @"*", nil];
+    if (![ignoreList containsObject:variable]) {
+        [self.programStack addObject:variable];
+    }
 }
 
 - (double)performOperation:(NSString *)operation {
