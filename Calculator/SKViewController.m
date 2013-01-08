@@ -73,12 +73,13 @@
 }
 
 - (IBAction)changeSign {
-    NSRange range = [self.display.text rangeOfString:@"-"];
-    if (range.location == NSNotFound) {
-        self.display.text = [@"-" stringByAppendingString:self.display.text];
-    } else {
-        if (self.userIsInTheMiddleOfEnteringANumber) {
-            self.display.text = [self.display.text substringFromIndex:1];
+    // +/- button is enabled only when the user is in the middle of entering a number
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        NSRange range = [self.display.text rangeOfString:@"-"];
+        if (range.location == NSNotFound) {
+            self.display.text = [@"-" stringByAppendingString:self.display.text];
+        } else {
+        self.display.text = [self.display.text substringFromIndex:1];
         }
     }
 }
