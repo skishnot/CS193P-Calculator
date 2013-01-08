@@ -34,6 +34,9 @@
     [self.programStack addObject:operandObject];
 }
 
+- (void)enterVariable:(NSString *)variable {
+    [self.programStack addObject:variable];
+}
 
 - (double)performOperation:(NSString *)operation {
     [self.programStack addObject:operation];

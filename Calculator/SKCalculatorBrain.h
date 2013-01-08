@@ -11,6 +11,7 @@
 @interface SKCalculatorBrain : NSObject
 
 - (void)pushOperand:(double)operand;
+- (void)enterVariable:(NSString *)variable;
 - (void)clearHistory;
 - (double)performOperation:(NSString *)operation;
 
