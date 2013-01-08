@@ -13,7 +13,6 @@
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic, strong) SKCalculatorBrain *brain;
-@property (nonatomic) BOOL dotIsInTheDisplay; // used to figure out if the display contains a dot
 @property (nonatomic) BOOL signChanged;
 
 @end
@@ -23,7 +22,6 @@
 @synthesize display = _display;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
-@synthesize dotIsInTheDisplay = _dotIsInTheDisplay;
 @synthesize stackDisplay = _stackDisplay;
 @synthesize signChanged = _signChanged;
 
@@ -36,7 +34,6 @@
 
 - (void)clearParameter {
     self.userIsInTheMiddleOfEnteringANumber = NO;
-    self.dotIsInTheDisplay = NO;
 //    self.display.text = @"0";
     self.signChanged = NO;
 }
@@ -53,10 +50,9 @@
 }
 
 - (IBAction)dotPressed {
-    if (!self.dotIsInTheDisplay) {
+    NSRange range = [self.display.text rangeOfString:@"."];
+    if (range.location == NSNotFound) {
         self.display.text = [self.display.text stringByAppendingString:@"."];
-        self.dotIsInTheDisplay = YES;
-        self.userIsInTheMiddleOfEnteringANumber = YES;
     }
 }
 
