@@ -24,5 +24,6 @@
 
 + (NSString *)descriptionOfProgram:(id)program;
 //getter for the program will supply with the program
++ (NSSet *)variableUsedInProgram:(id)program;
 
 @end

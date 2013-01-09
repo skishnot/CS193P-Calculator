@@ -140,4 +140,10 @@
     [self.operandStack removeAllObjects];
 }
 
++ (NSSet *)variableUsedInProgram:(id)program {
+    NSSet *set;
+    
+    return set;
+}
+
 @end
