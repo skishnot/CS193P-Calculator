@@ -45,14 +45,14 @@
 
 - (IBAction)enterPressed {
     [self.brain enterOperand:[self.display.text doubleValue]];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:[@" " stringByAppendingString:self.display.text]];
+    self.stackDisplay.text = [SKCalculatorBrain descriptionOfProgram:self.brain.program];
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)clearPressed {
     [self.brain clearHistory];
-    self.stackDisplay.text = @"History: ";
+    self.stackDisplay.text = [SKCalculatorBrain descriptionOfProgram:self.brain.program];
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
@@ -109,7 +109,7 @@
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:[NSString stringWithFormat:@" %@ =", operation]];
+    self.stackDisplay.text = [SKCalculatorBrain descriptionOfProgram:self.brain.program];
     double result = [self.brain performOperation:operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
