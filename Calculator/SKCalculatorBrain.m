@@ -44,7 +44,7 @@
 
 - (void)enterVariable:(NSString *)variable {
     //variable is added only if it doesn't belong in the ignorelist, which is a list of operations in this calculator.
-    NSArray *ignoreList = @[@"sqrt", @"sin", @"cos", @"π", @"+", @"-", @"/", @"*", nil];
+    NSArray *ignoreList = @[@"sqrt", @"sin", @"cos", @"π", @"+", @"-", @"/", @"*"];
     if (![ignoreList containsObject:variable]) {
         [self.programStack addObject:variable];
     }
@@ -63,7 +63,62 @@
 }
 
 + (NSString *)descriptionOfProgram:(id)program {
-    return @"Implement this in Assignment 2";
+    // 1. create a mutable copy
+    NSMutableArray *stack;
+    if ([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+    }
+    
+    // 2. take the last item in the program and process it (delegated by topOfDescription), then put the returned value in a new string.
+    return [self topOfDescription:stack];
+}
+
++ (NSString *)topOfDescription:(NSMutableArray *)stack {
+    // 0. identify different types of sets
+    NSArray *varOrConsSet = @[@"x", @"y", @"foo", @"π"];
+    NSArray *oneArgSet = @[@"sqrt", @"sin", @"cos"];
+    NSArray *twoArgSet = @[@"+", @"-", @"/", @"*"];
+    NSString *string = [NSString new];
+    
+    // 1. carefully take the last item
+    id topOfStack = [stack lastObject];
+    if (topOfStack) [stack removeLastObject];
+    
+    // 2. if number, proceed to return it
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        string = [NSString stringWithFormat:@"%@", topOfStack];
+    }
+    
+    // 3. if variable or constant, proceed to return it
+    else if ([varOrConsSet containsObject:topOfStack]) {
+        string = topOfStack;
+    }
+    
+    // 4. if 1-argument operation, put the argument after the operation in parenthesis
+    else if ([oneArgSet containsObject:topOfStack]) {
+        
+        // only if the next thing that pops up is a number
+        if ([[stack lastObject] isKindOfClass:[NSNumber class]]) {
+            string = [NSString stringWithFormat:@"%@(%@)", topOfStack, [self topOfDescription:stack]];
+        }
+        // else just separate them by a comma (not implementing just yet because I'm not still sure how it's going to turn out)
+    }
+
+    // 5. if 2-argument operation, take 2 subsequent arguments, and put them on either end of the operation.
+    else if ([twoArgSet containsObject:topOfStack]) {
+        
+        // only if the next thing that pops up is a number
+        if ([[stack lastObject] isKindOfClass:[NSNumber class]]) {
+            string = [NSString stringWithFormat:@"%@ %@", topOfStack, [self topOfDescription:stack]];
+        }
+        
+        // if the second argument is also a number, put it before the number
+        if ([[stack lastObject] isKindOfClass:[NSNumber class]]) {
+            string = [NSString stringWithFormat:@"%@ %@", [self topOfDescription:stack], string];
+        }
+    }
+    
+    return string;
 }
 
 + (double)popOperandOffStack:(NSMutableArray *)stack {
