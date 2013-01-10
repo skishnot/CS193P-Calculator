@@ -141,9 +141,19 @@
 }
 
 + (NSSet *)variableUsedInProgram:(id)program {
-    NSSet *set;
+    NSSet *stack = [NSSet new];
+    NSArray *ignoreList = @[@"sqrt", @"sin", @"cos", @"π", @"+", @"-", @"/", @"*"];
     
-    return set;
+    if ([program isKindOfClass:[NSArray class]]) {
+        // go over each item in stack and add NSStrings to stack
+        for (NSString *string in program) {
+            // add NSString only if it's not one of the operations
+            if (![ignoreList containsObject:string]) {
+                [stack setByAddingObject:string];
+            }
+        }
+    }
+    return stack;
 }
 
 @end
