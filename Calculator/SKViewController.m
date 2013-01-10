@@ -25,6 +25,13 @@
     return _brain;
 }
 
+- (NSDictionary *)testVariableValues {
+    if (!_testVariableValues) {
+        _testVariableValues = @{@"x":@5, @"y":@4.8, @"foo":@0};
+    }
+    return _testVariableValues;
+}
+
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     
@@ -108,9 +115,9 @@
     if (self.userIsInTheMiddleOfEnteringANumber) {
         [self enterPressed];
     }
-    NSString *operation = [sender currentTitle];
+    [self.brain enterOperation:sender.currentTitle];
     self.stackDisplay.text = [SKCalculatorBrain descriptionOfProgram:self.brain.program];
-    double result = [self.brain performOperation:operation];
+    double result = [SKCalculatorBrain runProgram:[self.brain program] usingVariableValues:self.testVariableValues];
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 

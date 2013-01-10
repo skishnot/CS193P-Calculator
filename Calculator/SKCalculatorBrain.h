@@ -12,6 +12,7 @@
 
 - (void)enterOperand:(double)operand;
 - (void)enterVariable:(NSString *)variable;
+- (void)enterOperation:(NSString *)operation;
 - (void)clearHistory;
 - (double)performOperation:(NSString *)operation;
 
