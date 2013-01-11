@@ -32,6 +32,17 @@
     return _testVariableValues;
 }
 
+- (void)updateVariableDisplay {
+    NSSet *set = [SKCalculatorBrain variableUsedInProgram:self.brain.program];
+    NSString *string = @"Variables: ";
+    // go through items in the set and display them
+    for (NSString* key in set) {
+        double val = [[self.testVariableValues objectForKey:key] doubleValue];
+        string = [string stringByAppendingFormat:@"%@=%g ", key, val];
+    }
+    self.variableDisplay.text = string;
+}
+
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     
@@ -54,6 +65,7 @@
     [self.brain enterOperand:[self.display.text doubleValue]];
     self.stackDisplay.text = [SKCalculatorBrain descriptionOfProgram:self.brain.program];
     self.display.text = @"0";
+    [self updateVariableDisplay];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
@@ -121,6 +133,15 @@
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
+- (IBAction)testPressed:(id)sender {
+    if ([sender currentTitle] == @"Test 1") {
+        <#statements#>
+    } else if ([sender currentTitle] == @"Test 2") {
+        
+    } else if ([sender currentTitle] == @"Test 3") {
+        
+    }
+}
 
 
 @end
